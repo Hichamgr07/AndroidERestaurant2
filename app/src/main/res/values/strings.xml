@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AndroidERestaurant</string>
+    <string name="title">BANGO-LOCO</string>
+    <string name="contentDescriptionLogo">Logo</string>
+    <string name="contentDescriptionListImg">Image</string>
+    <string name="entree">Entrées</string>
+    <string name="plat">Plats</string>
+    <string name="dessert">Desserts</string>
+    <string name="back">&lt;</string>
+</resources>
