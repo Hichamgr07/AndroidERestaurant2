@@ -48,9 +48,10 @@
         android:text="@string/dessert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.794"
+        app:layout_constraintHorizontal_bias="0.769"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.682"
         tools:ignore="TextContrastCheck" />
 
     <TextView
@@ -67,5 +68,15 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="51dp"
         tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="255dp"
+        android:layout_height="181dp"
+        app:layout_constraintBottom_toTopOf="@+id/homeButtonStarter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeTitle"
+        app:srcCompat="@drawable/cocoloco" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

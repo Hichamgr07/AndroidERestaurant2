@@ -2,14 +2,17 @@ package fr.isen.ElGuerzyly.androiderestaurant
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
+import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
 import com.squareup.picasso.Picasso
-import com.synnapps.carouselview.ImageListener
 import fr.isen.ElGuerzyly.androiderestaurant.databinding.ActivityDetailsDishBinding
 import fr.isen.ElGuerzyly.androiderestaurant.model.Dish
+import fr.isen.ElGuerzyly.androiderestaurant.model.DishBasket
+import java.io.File
 
 class DetailsDishActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityDetailsDishBinding
+    private lateinit var binding: ActivityDetailsDishBinding
+    private lateinit var dish: Dish
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,9 +24,32 @@ class DetailsDishActivity : AppCompatActivity() {
             finish()
         }
 
-        val dish : Dish = intent.getSerializableExtra(DISH) as Dish
+        dish = intent.getSerializableExtra(DISH) as Dish
         binding.dishTitle.text = dish.name_fr
-        binding.dishPrice.text = (dish.prices[0].price + " €")
+        val txt = "Total : ${dish.prices[0].price} €"
+        binding.dishPriceButton.text = txt
+
+        var quantity : Int = 1
+        binding.dishQuantity.text = quantity.toString()
+
+        binding.dishLessButton.setOnClickListener {
+            if (quantity > 1) {
+                quantity--
+                updateQuantityPrice(quantity)
+            }
+        }
+
+        binding.dishMoreButton.setOnClickListener {
+            quantity++
+            updateQuantityPrice(quantity)
+        }
+
+
+        binding.dishPriceButton.setOnClickListener {
+            Snackbar.make(it, "Add to WishList", Snackbar.LENGTH_LONG).show()
+            updateFile(DishBasket(dish, quantity))
+        }
+
 
         var ingredients = ""
         for (i in dish.ingredients) {
@@ -49,5 +75,26 @@ class DetailsDishActivity : AppCompatActivity() {
                 }
             }
         }
+
+
+    }
+     private fun updateQuantityPrice(quantity: Int) {
+        binding.dishQuantity.text = quantity.toString()
+        val price = dish.prices[0].price.toFloat()
+        val totalPrice = "Total : ${price * quantity} €"
+        binding.dishPriceButton.text = totalPrice
+    }
+
+    private fun updateFile(dishBasket: DishBasket) {
+        val file = File(cacheDir.absolutePath + "/cache.json")
+        var dishesBasket: List<DishBasket> = ArrayList()
+
+        if (file.exists()) {
+            dishesBasket = Gson().fromJson(file.readText(), List::class.java) as List<DishBasket>
+        }
+
+        dishesBasket = dishesBasket + dishBasket
+        file.writeText(Gson().toJson(dishesBasket))
+
     }
 }

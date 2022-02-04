@@ -7,4 +7,6 @@
     <string name="plat">Plats</string>
     <string name="dessert">Desserts</string>
     <string name="back">&lt;</string>
+    <string name="dishLessButton">-</string>
+    <string name="dishMoreButton">+</string>
 </resources>

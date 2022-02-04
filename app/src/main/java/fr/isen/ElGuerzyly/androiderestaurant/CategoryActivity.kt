@@ -26,6 +26,10 @@ class CategoryActivity : AppCompatActivity() {
         binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.categoryButtonBack.setOnClickListener {
+            finish()
+        }
+
 
         val category = intent.getStringExtra(TITLE_CATEGORY)
         binding.categoryTitle.text = category
@@ -43,7 +47,6 @@ class CategoryActivity : AppCompatActivity() {
         val request = JsonObjectRequest(
             Request.Method.POST, url, jsonObject,
             {
-                Log.e("API", "jean2")
                 val json = Gson().fromJson(it.toString(), RequestResult::class.java)
                 display(json.data.firstOrNull{dish-> dish.name_fr == category}?.items ?: listOf())
             }, {
@@ -52,13 +55,12 @@ class CategoryActivity : AppCompatActivity() {
                 finish()
             })
 
-        Log.e("API", "jean")
+
 
         Volley.newRequestQueue(this).add(request)
     }
 
     private fun display(dishesList : List<Dish>) {
-        Log.e("efefefef","efdg")
         binding.categoryList.adapter = DishAdapter(dishesList) {
             val intent = Intent(this, DetailsDishActivity::class.java).apply {
                 putExtra(DISH, it)
