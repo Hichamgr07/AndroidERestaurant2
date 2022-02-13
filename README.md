@@ -1,4 +1,4 @@
-AndroidERestaurantAmadori
+AndroidERestaurant2
 TD Android réalisé dans le cadre du cours de développement mobile, avec pour objectif de comprendre comment marche le développement Android.
 
 APK
@@ -8,11 +8,9 @@ Ce qui a été réalisé
 Toutes les parties du TD ont été faites mais  certaine on toujours besion de debug  
 Ce qui reste à faire
 
-Mettre en place le Cache + fonctionnement "Pull to refresh"
 Mettre en place SQLITE & Maps
-Tester 
-Mettre en place Koin
-Ajout d'élément User Friendly + Améliorations design
+Tester
+
 Ajout Licence Apache 2.0 ->
 Copyright 2022 hicham el guerzyly
 
