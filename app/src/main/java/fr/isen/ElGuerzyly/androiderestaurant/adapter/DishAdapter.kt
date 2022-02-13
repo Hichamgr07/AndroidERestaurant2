@@ -1,12 +1,12 @@
-package fr.isen.ElGuerzyly.androiderestaurant
+package fr.isen.ElGuerzyly.androiderestaurant.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import fr.isen.ElGuerzyly.androiderestaurant.R
 import fr.isen.ElGuerzyly.androiderestaurant.databinding.CategoryCellBinding
 import fr.isen.ElGuerzyly.androiderestaurant.model.Dish
 

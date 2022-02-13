@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">AndroidERestaurant</string>
+
+    <!-- HOME ACTIVITY -->
+
+    <string name="app_name">BANGO-LOCO</string>
     <string name="title">BANGO-LOCO</string>
     <string name="contentDescriptionLogo">Logo</string>
     <string name="contentDescriptionListImg">Image</string>
@@ -9,4 +12,87 @@
     <string name="back">&lt;</string>
     <string name="dishLessButton">-</string>
     <string name="dishMoreButton">+</string>
+
+
+
+
+    <!-- general setup  -->
+    <string name="logoContentDescription">Logo</string>
+    <string name="APIfailure">API R failed</string>
+    <string name="totalPrice">Total: </string>
+
+
+
+
+
+
+    <!-- Shared Preferences -->
+    <string name="spFileName">SharedPreferences</string>
+    <string name="spTotalQuantity">totalBasketQuantity</string>
+    <string name="spTotalPrice">totalBasketPrice</string>
+    <string name="spUserId">userId</string>
+
+    <!-- BasketActivity -->
+    <string name="basketTitle">your wish list</string>
+    <string name="basketButtonBuy">pass the command </string>
+    <string name="basketIconDeleteContentDescription">delete an item</string>
+    <string name="basketButtonDeleteAllContentDescription">delete all the items</string>
+    <string name="basketDeleteAllTxt">your basket has been deleted </string>
+    <string name="quantity">Quantity:</string>
+    <string name="basketTotalQuantity">all Quantity :</string>
+
+    <!-- CategoryActivity -->
+    <string name="listImageContentDescription">pictures</string>
+
+    <!-- CommandActivity -->
+    <string name="successCommandTxt">your command is in acheviment </string>
+    <string name="failureCommandTxt">your command has been droped , were sorry</string>
+    <string name="successCommand">command done </string>
+    <string name="warningUserLogout">you need to log in to pass the command </string>
+
+    <!-- DetailsDishActivity -->
+    <string name="addToBasket">item has been added </string>
+
+
+
+
+    <!-- LoginActivity -->
+    <string name="loginTitle">connecting </string>
+    <string name="signupTitle">signup</string>
+    <string name="firstname">first name</string>
+    <string name="lastname">last name</string>
+    <string name="address">address </string>
+    <string name="email">E-mail</string>
+    <string name="password">password</string>
+    <string name="loginToSignUp">do not have account ? well just signup </string>
+    <string name="signUpToLogin">already have account signup </string>
+    <string name="validForm">Valide </string>
+    <string name="successLogin">success</string>
+    <string name="failureLogin">wrong credentials</string>
+    <string name="successSignup">signup  done </string>
+    <string name="signupErrorPassword">please enter a password with at least 8  char</string>
+    <string name="signupErrorEmail">entre a valid email </string>
+    <string name="signupErrorOther">please fill in all the forums </string>
+
+    <!-- MenuActivity -->
+    <string name="menuBasketTitle">icon </string>
+    <string name="menuQuantityBasketTitle">Quantity </string>
+    <string name="menuUserTitle"> user icon</string>
+
+
+
+    <!-- UserActivity -->
+    <string name="userTitle">welcome to your account </string>
+    <string name="userLogoutButton">logout</string>
+    <string name="successLogout">your logged out </string>
+
+
+
+    <!-- Extra -->
+    <string name="ExtraCategoryTitle">categoryTitle</string>
+    <string name="ExtraDishName">dishName</string>
+
+
+
+
 </resources>

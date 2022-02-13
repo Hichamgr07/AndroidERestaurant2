@@ -1,14 +1,12 @@
 package fr.isen.ElGuerzyly.androiderestaurant
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import fr.isen.ElGuerzyly.androiderestaurant.databinding.ActivityHomeBinding
 
 
-const val TITLE_CATEGORY = "title"
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : MenuActivity() {
     private lateinit var binding : ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun changeActivity(category : String) {
         val intent = Intent(this, CategoryActivity::class.java).apply {
-            putExtra(TITLE_CATEGORY, category)
+            putExtra(getString(R.string.ExtraCategoryTitle), category)
         }
         startActivity(intent)
     }

@@ -1,16 +1,17 @@
 package fr.isen.ElGuerzyly.androiderestaurant
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.widget.Toast
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import fr.isen.ElGuerzyly.androiderestaurant.databinding.ActivityDetailsDishBinding
+import fr.isen.ElGuerzyly.androiderestaurant.model.BasketList
 import fr.isen.ElGuerzyly.androiderestaurant.model.Dish
 import fr.isen.ElGuerzyly.androiderestaurant.model.DishBasket
 import java.io.File
 
-class DetailsDishActivity : AppCompatActivity() {
+class DetailsDishActivity : MenuActivity() {
     private lateinit var binding: ActivityDetailsDishBinding
     private lateinit var dish: Dish
 
@@ -39,6 +40,7 @@ class DetailsDishActivity : AppCompatActivity() {
             }
         }
 
+
         binding.dishMoreButton.setOnClickListener {
             quantity++
             updateQuantityPrice(quantity)
@@ -46,8 +48,10 @@ class DetailsDishActivity : AppCompatActivity() {
 
 
         binding.dishPriceButton.setOnClickListener {
-            Snackbar.make(it, "Add to WishList", Snackbar.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.addToBasket), Toast.LENGTH_SHORT).show()
             updateFile(DishBasket(dish, quantity))
+            updateSharedPreferences(quantity, (dish.prices[0].price.toFloat() * quantity))
+            finish()
         }
 
 
@@ -80,21 +84,44 @@ class DetailsDishActivity : AppCompatActivity() {
     }
      private fun updateQuantityPrice(quantity: Int) {
         binding.dishQuantity.text = quantity.toString()
+
         val price = dish.prices[0].price.toFloat()
         val totalPrice = "Total : ${price * quantity} €"
         binding.dishPriceButton.text = totalPrice
     }
 
-    private fun updateFile(dishBasket: DishBasket) {
-        val file = File(cacheDir.absolutePath + "/cache.json")
+    private fun updateFile(dishBasket : DishBasket) {
+        val file = File(cacheDir.absolutePath + "/basket.json")
         var dishesBasket: List<DishBasket> = ArrayList()
 
         if (file.exists()) {
-            dishesBasket = Gson().fromJson(file.readText(), List::class.java) as List<DishBasket>
+            dishesBasket = Gson().fromJson(file.readText(), BasketList::class.java).data
         }
 
-        dishesBasket = dishesBasket + dishBasket
-        file.writeText(Gson().toJson(dishesBasket))
+        var dupli = false
+        for (i in dishesBasket.indices) {
+            if (dishesBasket[i].dish == dishBasket.dish) {
+                dishesBasket[i].quantity += dishBasket.quantity
+                dupli = true
+            }
+        }
 
+        if (!dupli) {
+            dishesBasket = dishesBasket + dishBasket
+        }
+
+        file.writeText(Gson().toJson(BasketList(dishesBasket)))
+    }
+
+    private fun updateSharedPreferences(quantity: Int, price: Float) {
+        val sharedPreferences = this.getSharedPreferences(getString(R.string.spFileName), Context.MODE_PRIVATE)
+
+        val oldQuantity = sharedPreferences.getInt(getString(R.string.spTotalQuantity), 0)
+        val newQuantity = oldQuantity + quantity
+        sharedPreferences.edit().putInt(getString(R.string.spTotalQuantity), newQuantity).apply()
+
+        val oldPrice = sharedPreferences.getFloat(getString(R.string.spTotalPrice), 0.0f)
+        val newPrice = oldPrice + price
+        sharedPreferences.edit().putFloat(getString(R.string.spTotalPrice), newPrice).apply()
     }
 }

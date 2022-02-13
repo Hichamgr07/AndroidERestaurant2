@@ -4,12 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
+import fr.isen.ElGuerzyly.androiderestaurant.adapter.DishAdapter
 import fr.isen.ElGuerzyly.androiderestaurant.databinding.ActivityCategoryBinding
 import fr.isen.ElGuerzyly.androiderestaurant.model.Dish
 import fr.isen.ElGuerzyly.androiderestaurant.model.RequestResult
@@ -17,7 +18,7 @@ import org.json.JSONObject
 
 const val DISH = "dish"
 
-class CategoryActivity : AppCompatActivity() {
+class CategoryActivity : MenuActivity() {
     private lateinit var binding : ActivityCategoryBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +32,7 @@ class CategoryActivity : AppCompatActivity() {
         }
 
 
-        val category = intent.getStringExtra(TITLE_CATEGORY)
+        val category = intent.getStringExtra(getString(R.string.ExtraCategoryTitle))
         binding.categoryTitle.text = category
         binding.categoryList.layoutManager = LinearLayoutManager(this)
         loadDishesFromCategory(category)
@@ -55,12 +56,13 @@ class CategoryActivity : AppCompatActivity() {
                 finish()
             })
 
-
+        request.retryPolicy = DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS, 0, 1f)
 
         Volley.newRequestQueue(this).add(request)
     }
 
     private fun display(dishesList : List<Dish>) {
+        binding.categoryList.layoutManager = LinearLayoutManager(this)
         binding.categoryList.adapter = DishAdapter(dishesList) {
             val intent = Intent(this, DetailsDishActivity::class.java).apply {
                 putExtra(DISH, it)

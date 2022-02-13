@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+        <item
+            android:id="@+id/menuButtonUser"
+            android:icon="@drawable/user"
+            android:title="@string/menuUserTitle"
+            app:showAsAction="ifRoom"
+            />
+        <item
+            android:id="@+id/menuButtonBasket"
+            android:icon="@drawable/panier"
+            android:title="@string/menuBasketTitle"
+            app:showAsAction="always" />
+        <item
+            android:id="@+id/menuQuantityBasket"
+            android:icon="@drawable/logo"
+            android:title="@string/menuQuantityBasketTitle"
+            android:visibility="visible"
+            app:actionLayout="@layout/custom_menu_item"
+            app:showAsAction="always"
+            tools:visibility="visible" />
+</menu>
